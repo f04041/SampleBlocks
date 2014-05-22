@@ -3,7 +3,6 @@ package mods.blocksample.common.block;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -21,14 +20,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlocksamplePanel extends BlockPane
 {
     /**
-     * Holds the texture index of the side of the pane (the thin lateral side)
-     */
+* Holds the texture index of the side of the pane (the thin lateral side)
+*/
     private final String sideTextureIndex;
 
     /**
-     * If this field is true, the pane block drops itself when destroyed (like the iron fences), otherwise, it's just
-     * destroyed (like glass panes)
-     */
+* If this field is true, the pane block drops itself when destroyed (like the iron fences), otherwise, it's just
+* destroyed (like glass panes)
+*/
     private final boolean canDropItself;
     private final String field_94402_c;
     @SideOnly(Side.CLIENT)
@@ -41,29 +40,29 @@ public class BlocksamplePanel extends BlockPane
         this.canDropItself = true;
         this.field_94402_c = par2Str;
         this.setCreativeTab(CreativeTabs.tabDecorations);
-		this.setBurnProperties(this.blockID, 5, 10);
+this.setBurnProperties(this.blockID, 5, 10);
     }
 
     /**
-     * Returns the ID of the items to drop on destruction.
-     */
+* Returns the ID of the items to drop on destruction.
+*/
     public int idDropped(int par1, Random par2Random, int par3)
     {
         return !this.canDropItself ? 0 : super.idDropped(par1, par2Random, par3);
     }
 
     /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-     */
+* Is this block (a) opaque and (b) a full 1m cube? This determines whether or not to render the shared face of two
+* adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+*/
     public boolean isOpaqueCube()
     {
         return false;
     }
 
     /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-     */
+* If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
+*/
     public boolean renderAsNormalBlock()
     {
         return false;
@@ -72,9 +71,9 @@ public class BlocksamplePanel extends BlockPane
     @SideOnly(Side.CLIENT)
 
     /**
-     * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
-     * coordinates.  Args: blockAccess, x, y, z, side
-     */
+* Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
+* coordinates. Args: blockAccess, x, y, z, side
+*/
     public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         int i1 = par1IBlockAccess.getBlockId(par2, par3, par4);
@@ -82,9 +81,9 @@ public class BlocksamplePanel extends BlockPane
     }
 
     /**
-     * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
-     * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
-     */
+* Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
+* mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
+*/
     public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
     {
         boolean flag = this.canPaneConnectTo(par1World,par2, par3, par4,ForgeDirection.NORTH);
@@ -132,16 +131,16 @@ public class BlocksamplePanel extends BlockPane
     }
 
     /**
-     * Sets the block's bounds for rendering it as an item
-     */
+* Sets the block's bounds for rendering it as an item
+*/
     public void setBlockBoundsForItemRender()
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
     /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y, z
-     */
+* Updates the blocks bounds based on its current state. Args: world, x, y, z
+*/
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         float f = 0.4375F;
@@ -193,34 +192,36 @@ public class BlocksamplePanel extends BlockPane
     @SideOnly(Side.CLIENT)
 
     /**
-     * Returns the texture index of the thin side of the pane.
-     */
+* Returns the texture index of the thin side of the pane.
+*/
     public Icon getSideTextureIndex()
     {
         return this.theIcon;
     }
 
     /**
-     * Gets passed in the blockID of the block adjacent and supposed to return true if its allowed to connect to the
-     * type of blockID passed in. Args: blockID
-     */
+* Gets passed in the blockID of the block adjacent and supposed to return true if its allowed to connect to the
+* type of blockID passed in. Args: blockID
+*/
+    /*
     public final boolean canThisPaneConnectToThisBlockID(int par1)
     {
         return Block.opaqueCubeLookup[par1] || par1 == this.blockID || par1 == Block.glass.blockID;
     }
+    */
 
     /**
-     * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
-     */
+* Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
+*/
     protected boolean canSilkHarvest()
     {
         return true;
     }
 
     /**
-     * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
-     * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
-     */
+* Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
+* and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
+*/
     protected ItemStack createStackedBlock(int par1)
     {
         return new ItemStack(this.blockID, 1, par1);
@@ -229,9 +230,9 @@ public class BlocksamplePanel extends BlockPane
     @SideOnly(Side.CLIENT)
 
     /**
-     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
-     * is the only chance you get to register icons.
-     */
+* When this method is called, your block should register all the icons it needs with the given IconRegister. This
+* is the only chance you get to register icons.
+*/
     public void registerIcons(IconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon(this.field_94402_c);
