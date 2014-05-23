@@ -1,7 +1,9 @@
 ﻿package mods.blocksample.common;
 
+import mods.blocksample.common.block.BlockPlastic;
 import mods.blocksample.common.block.BlockSample;
 import mods.blocksample.common.block.BlocksamplePanel;
+import mods.blocksample.common.block.ItemBlockPlastic;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import cpw.mods.fml.common.Mod;
@@ -16,7 +18,9 @@ public class SampleBlockCore
 {
 	public static Block blockSample;
 	public static int blockSampleID = 4087;
-	public static Block blockSamplePanel=(new BlocksamplePanel(blockSampleID+1, "iron_bars", "iron_bars", Material.wood, true)).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockSamplePanel");
+	public static Block blockSamplePanel;
+	public static Block blockPlastic;
+	public static Block blockPlastic2;
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
@@ -32,8 +36,13 @@ public class SampleBlockCore
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		//ブロックの登録
-		blockSample = new BlockSample(blockSampleID, Material.cloth);
+		blockSamplePanel=(new BlocksamplePanel(blockSampleID+1, "iron_bars", "iron_bars", Material.wood, true)).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockSamplePanel");
+		blockSample = new BlockSample(blockSampleID, Material.cloth).setLightValue(1.0F);
+		blockPlastic=new BlockPlastic(blockSampleID+2,Material.cloth).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setLightValue(1.0F);
+		blockPlastic2=new BlockPlastic(blockSampleID+3,Material.cloth).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundGlassFootstep);
 		GameRegistry.registerBlock(blockSample, "blockSample");
 		GameRegistry.registerBlock(blockSamplePanel, "blockSamplePanel");
+		GameRegistry.registerBlock(blockPlastic, ItemBlockPlastic.class, "blockPlastic");
+		GameRegistry.registerBlock(blockPlastic2, ItemBlockPlastic.class, "blockPlastic2");
 	}
 }

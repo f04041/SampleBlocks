@@ -40,6 +40,7 @@ public class BlocksamplePanel extends BlockPane
         this.canDropItself = true;
         this.field_94402_c = par2Str;
         this.setCreativeTab(CreativeTabs.tabDecorations);
+        this.setLightValue(1.0F);
 this.setBurnProperties(this.blockID, 5, 10);
     }
 
