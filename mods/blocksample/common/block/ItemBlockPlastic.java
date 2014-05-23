@@ -2,6 +2,7 @@ package mods.blocksample.common.block;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import mods.blocksample.common.SampleBlockCore;
 
 public class ItemBlockPlastic extends ItemBlock {
 

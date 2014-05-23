@@ -21,6 +21,7 @@ public class SampleBlockCore
 	public static Block blockSamplePanel;
 	public static Block blockPlastic;
 	public static Block blockPlastic2;
+	public static Block blockPlasticGlass;
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
@@ -38,11 +39,13 @@ public class SampleBlockCore
 		//ブロックの登録
 		blockSamplePanel=(new BlocksamplePanel(blockSampleID+1, "iron_bars", "iron_bars", Material.wood, true)).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockSamplePanel");
 		blockSample = new BlockSample(blockSampleID, Material.cloth).setLightValue(1.0F);
-		blockPlastic=new BlockPlastic(blockSampleID+2,Material.cloth).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setLightValue(1.0F);
-		blockPlastic2=new BlockPlastic(blockSampleID+3,Material.cloth).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundGlassFootstep);
+		blockPlastic=new BlockPlastic(blockSampleID+2,Material.cloth).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setLightValue(1.0F).setUnlocalizedName("blockPlastic");
+		blockPlastic2=new BlockPlastic(blockSampleID+3,Material.cloth).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockPlastic2");
+		blockPlasticGlass=new BlockPlastic(blockSampleID+4,Material.glass).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("blockPlasticGlass").setTextureName("glass");
 		GameRegistry.registerBlock(blockSample, "blockSample");
 		GameRegistry.registerBlock(blockSamplePanel, "blockSamplePanel");
 		GameRegistry.registerBlock(blockPlastic, ItemBlockPlastic.class, "blockPlastic");
 		GameRegistry.registerBlock(blockPlastic2, ItemBlockPlastic.class, "blockPlastic2");
+		GameRegistry.registerBlock(blockPlasticGlass, ItemBlockPlastic.class, "blockPlasticGlass");
 	}
 }

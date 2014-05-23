@@ -2,7 +2,7 @@ package mods.blocksample.common.block;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,10 +11,10 @@ import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPlastic extends Block {
+public class BlockPlasticGlass extends BlockGlass {
 
-	public BlockPlastic(int par1, Material par2Material) {
-		super(par1, par2Material);
+	public BlockPlasticGlass(int par1, Material par2Material) {
+		super(par1, par2Material, true);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 
