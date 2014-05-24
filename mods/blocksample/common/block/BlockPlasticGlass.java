@@ -16,6 +16,7 @@ public class BlockPlasticGlass extends BlockGlass {
 	public BlockPlasticGlass(int par1, Material par2Material) {
 		super(par1, par2Material, true);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setLightOpacity(0);
 	}
 
 	@Override
@@ -39,6 +40,11 @@ public class BlockPlasticGlass extends BlockGlass {
 			par3List.add(new ItemStack(par1, 1, i));
 		}
 	}
+
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
 
 	@Override
 	public boolean canHarvestBlock(EntityPlayer player, int meta){
