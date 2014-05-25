@@ -2,7 +2,6 @@ package mods.blocksample.common.block;
 
 import java.util.List;
 
-import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -14,10 +13,10 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPlasticGlass extends BlockBreakable  {
+public class BlockPlasitcPanels extends BlocksamplePanel  {
 
-	public BlockPlasticGlass(int par1, Material par2Material,boolean shouldSideRender ) {
-		super(par1, "glass", Material.glass,shouldSideRender);
+	public BlockPlasitcPanels(int par1, String par2Str, String par3Str, Material par4Material, boolean par5) {
+		super(par1, par3Str, par3Str, par4Material, par5);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setLightOpacity(0);
 		this.setBurnProperties(this.blockID, 5, 10);
@@ -28,13 +27,6 @@ public class BlockPlasticGlass extends BlockBreakable  {
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int par1, int par2) {
 		return super.getIcon(par1, par2);
-	}
-
-
-	@Override
-	public int getLightValue(final IBlockAccess world, final int x, final int y, final int z) {
-		if(world.getBlockMetadata(x, y, z)==2) return 15;
-		return 0;
 	}
 
 	@Override
@@ -102,14 +94,6 @@ public class BlockPlasticGlass extends BlockBreakable  {
 		}
 		return 15790320;
 	}
-
-	@Override
-    public int getLightOpacity(World world, int x, int y, int z)
-    {
-		if(world.getBlockMetadata(x, y, z)==5) return 255;
-		return 0;
-
-    }
 
 	@Override
 	public int damageDropped(int par1)

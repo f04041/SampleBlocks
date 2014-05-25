@@ -2,7 +2,7 @@ package mods.blocksample.common.block;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,11 +11,12 @@ import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPlastic extends Block {
+public class BlockPlastic extends BlockColored {
 
 	public BlockPlastic(int par1, Material par2Material) {
 		super(par1, par2Material);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setTextureName("wool_colored");
 	}
 
 	@Override
@@ -29,6 +30,11 @@ public class BlockPlastic extends Block {
 	{
 		return par1;
 	}
+
+	public static int getBlockFromDye(int par0)
+    {
+        return ~par0 & 15;
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)

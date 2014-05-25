@@ -16,7 +16,7 @@ public class BlockSample extends Block
 		super(par1, par2Material);
 		this.setCreativeTab(CreativeTabs.tabBlock);//クリエイティブタブの選択
 		this.setUnlocalizedName("blockSample");	//システム名の設定
-		this.setTextureName("samplemod:block_sample");	//ブロックのテクスチャの指定
+		this.setTextureName("wool_colored");	//ブロックのテクスチャの指定
 		//いらないものは消してください
 		this.setHardness(0.0F);			//硬さ
 		this.setResistance(2000.0F);		//爆破耐性
