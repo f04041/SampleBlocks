@@ -1,5 +1,6 @@
 ﻿package mods.blocksample.common;
 
+import mods.blocksample.common.Item.ItemSample;
 import mods.blocksample.common.block.BlockPlasitcPanels;
 import mods.blocksample.common.block.BlockPlastic;
 import mods.blocksample.common.block.BlockPlasticGlass;
@@ -8,6 +9,8 @@ import mods.blocksample.common.block.BlocksamplePanel;
 import mods.blocksample.common.block.ItemBlockPlastic;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -20,12 +23,14 @@ public class SampleBlockCore
 {
 	public static Block blockSample;
 	public static int blockSampleID = 4087;
+	public static int sampleItemWithMetadataID=10000;
 	public static Block blockSamplePanel;
 	public static Block blockPlastic;
 	public static Block blockPlastic2;
 	public static Block blockPlasticGlass;
 	public static Block blockPlasticPanels;
 	public static Block blockPlasticPanels2;
+	public static Item sampleItemWithMetadata;
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
@@ -38,8 +43,10 @@ public class SampleBlockCore
 	}
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event){
+
+		sampleItemWithMetadata= new ItemSample(sampleItemWithMetadataID).setUnlocalizedName("ItemSample").setCreativeTab(CreativeTabs.tabMaterials);
+		GameRegistry.registerItem(sampleItemWithMetadata, "sampleItem");
 		//ブロックの登録
 		blockSamplePanel=new BlocksamplePanel(blockSampleID+1, "iron_bars", "iron_bars", Material.wood, false).setHardness(0.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockSamplePanel").setLightValue(1.0F);
 		blockSample = new BlockSample(blockSampleID, Material.cloth).setLightValue(1.0F);
