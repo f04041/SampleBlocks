@@ -2,12 +2,13 @@ package mods.blocksample.common.Item;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -54,8 +55,8 @@ public class ItemSample extends Item {
 
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
-		boolean flag =false;
-		MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, flag);
+		boolean flag = true;
+        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, flag);
         if (par1ItemStack.getItemDamage() == 2)
         {
         	par3EntityPlayer.dropPlayerItem(new ItemStack(this, 1, 1));
@@ -63,35 +64,61 @@ public class ItemSample extends Item {
             {
                 --par1ItemStack.stackSize;
             }
+        }else if(par1ItemStack.getItemDamage() == 0){
+        	if (movingobjectposition == null)
+            {
+                return par1ItemStack;
+            }else{
+            	if (movingobjectposition.typeOfHit == EnumMovingObjectType.TILE)
+                {
+                    int i = movingobjectposition.blockX;
+                    int j = movingobjectposition.blockY;
+                    int k = movingobjectposition.blockZ;
+
+                    if (!par2World.canMineBlock(par3EntityPlayer, i, j, k))
+                    {
+                        return par1ItemStack;
+                    }
+
+                    if (!par3EntityPlayer.canPlayerEdit(i, j, k, movingobjectposition.sideHit, par1ItemStack))
+                    {
+                        return par1ItemStack;
+                    }
+
+                    if (par2World.getBlockMaterial(i, j, k) == Material.water && par2World.getBlockMetadata(i, j, k) == 0)
+                    {
+                        par2World.setBlockToAir(i, j, k);
+
+                        ItemStack item = new ItemStack(this,1,1);
+
+                        if (par3EntityPlayer.capabilities.isCreativeMode)
+                        {
+                            return par1ItemStack;
+                        }
+
+                        if (--par1ItemStack.stackSize <= 0)
+                        {
+                            return item;
+                        }
+
+                        if (!par3EntityPlayer.inventory.addItemStackToInventory(item))
+                        {
+                            par3EntityPlayer.dropPlayerItem(item);
+                        }
+
+                        return par1ItemStack;
+                    }
+            }
+
+
         }
+      }
         return par1ItemStack;
     }
-
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-    {
-        int i1 = par3World.getBlockId(par4, par5, par6);
-        Block block = Block.waterStill;
-        if((par1ItemStack.getItemDamage() == 2)){
-
-        	if (i1 == Block.waterStill.blockID && par1ItemStack.getItemDamage() == 0)
-        	{
-        		par2EntityPlayer.dropPlayerItem(new ItemStack(pickaxeDiamond, 1, 0));
-        		--par1ItemStack.stackSize;
-        		return true;
-        }else{
-        		return false;
-        	}
-        }
-        return false;
-    }
-
 
         @Override
         @SideOnly(Side.CLIENT)
         public void registerIcons(IconRegister par1IconRegister) {
-                //テクスチャのパス指定。
-                //メタデータは0から2でつまり3未満
-                //src/minecraft/assets/samplemod/items/itemsample_(メタデータ).png
         this.iconItemSample = new Icon[3];
 
         for (int i = 0; i < this.iconItemSample.length; ++i)
